@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+    <head>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+    
+        <h1>AngularJS Resolves - <small>Example 3: Return a resolved $resource</small></h1>
+        
+        <!-- App Content Container -->
+        <div class="application-container">
+            <div ui-view class="application-view"></div>
+        </div>
+    
+        <!-- Example page partials -->
+        <script type="text/ng-template" id="page1.html">
+            <div id="page1" class="pages">
+                <h2>Page 1 <small>(State 1)</small></h2>
+                <p>
+                    <a class="btn btn-info" ng-click="$state.transitionTo('state2'); message='waiting for all data...'">Go to state 2</a> But wait for all resolve data to load
+                </p>
+                <p class="alert alert-warning" ng-show="message">{{message}}</p>
+            </div>
+        </script>
+        
+        <script type="text/ng-template" id="page2.html">
+            <div id="page2" class="pages">
+                <h1>Page 2 <small>({{$state.current.name}})</small></h1>
+                <p><a a class="btn btn-info" ng-click="$state.transitionTo('state1')">Go back to state 1</a></p>
+                <div>
+                    
+                    <h2>Resource 1 Resolve: Public Gists from Github</h2>
+                    <ul><li ng-repeat="gist in gists | limitTo:8">{{gist.name}}</li></ul>
+                    
+                </div>
+            </div>
+        </script>
+    
+        <!-- Scripts -->
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular.js"></script>
+        <script src="ui-router.js"></script>
+        <script src="http://code.angularjs.org/1.2.0-rc.3/angular-resource.js"></script>
+        <script src="script.js"></script>
+    </body>
+
+</html>
